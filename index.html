@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sitecore8-deployment-on-azure by schijioke-uche</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Sitecore8-deployment-on-azure</h1>
+      <h2 class="project-tagline">How to deploy Sitecore 8.0 solution to Microsoft Azure Web App </h2>
+      <a href="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure" class="btn">View on GitHub</a>
+      <a href="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p>How to deploy Sitecore 8.0 solution to Microsoft Azure Web App using Visual Studio</p>
+
+<blockquote>
+<p><strong>NOTE:</strong> On Azure Web Apps, Sitecore does not support scaling out App Service Plan due to shared <code>WWWROOT</code> directory between instances. Sitecore application has certain types of data that requires persistence in the file system.</p>
+</blockquote>
+
+<p>After developing a Sitecore solution in Visual Studio, it is possible to manually publish this solution to the Microsoft Azure Cloud Platform. This article provides a list of techniques that can be used to deploy a Sitecore solution to Microsoft Azure using Microsoft Visual Studio.</p>
+
+<blockquote>
+<p><strong>Important:</strong> It is highly recommended that you get acquainted with the <a href="http://azure.microsoft.com/en-us/documentation/articles/fundamentals-application-models/">Compute Hosting Options Provided by Azure</a> and <a href="http://www.microsoftvirtualacademy.com/colleges/Azure-fundamentals">Microsoft Azure Fundamentals</a> before following the instructions in this article.</p>
+</blockquote>
+
+<p><strong>Requirements:</strong></p>
+
+<ul>
+<li>A work or school account / Microsoft account and a Microsoft Azure subscription with the following Azure services enabled:
+
+<ul>
+<li><a href="https://msdn.microsoft.com/en-us/library/azure/dn948515.aspx">Azure Web App</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/azure/gg433040.aspx">Azure Storage</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/azure/ee336279.aspx">Azure SQL Database</a></li>
+</ul>
+</li>
+<li>Microsoft Visual Studio 2013 / 2015</li>
+<li>Microsoft Azure SDK 2.8.2 for .NET or newer</li>
+<li>Microsoft SQL Server Management Studio 2014 or newer</li>
+<li>MongoDB 2.6.1</li>
+<li>Sitecore® Experience Platform™ 8.0 rev. 160115 (8.0 Update-7) or higher</li>
+</ul>
+
+<blockquote>
+<p><strong>Note:</strong> To download the latest version of the Microsoft Azure SDK and Tool for Visual Studio, follow this link: <a href="http://azure.microsoft.com/en-us/downloads/">http://azure.microsoft.com/en-us/downloads/</a></p>
+</blockquote>
+
+<h2>
+<a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instructions</h2>
+
+<p>The recommended approach to deploy a Sitecore solution to Microsoft Azure using Visual Studio is as follows:</p>
+
+<ol>
+<li>
+<p>Log in to the <strong>Microsoft Azure Portal</strong> using the <a href="https://portal.azure.com">https://portal.azure.com</a> URL.</p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-01.png" alt=""></p>
+</li>
+<li>
+<p>In the <strong>Jumpbar</strong>, click the <strong>New</strong> button, then select the <strong>Web + Mobile</strong> section and click the <strong>Web App</strong> button. The <strong>Web App</strong> blade appears.</p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-02.png" alt=""></p>
+</li>
+<li>
+<p>In the <strong>Web App</strong> blade, fill in the <strong>URL</strong> field and configure the other section if needed, then click the <strong>Create</strong> button. </p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-03.png" alt=""></p>
+</li>
+<li>
+<p>In the <strong>Startboard</strong>, click on the <strong>Web App</strong> tile.</p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-04.png" alt=""></p>
+</li>
+<li>
+<p>In the <strong>Web App</strong> blade, click the <strong>All settings</strong> button and select the <strong>Application settings</strong> section.</p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-05.png" alt=""></p>
+</li>
+<li><p>In the <strong>Application settings</strong> blade, configure the following groups and save the changes.</p></li>
+<li>
+<p>In the <strong>General settings</strong> group:</p>
+
+<ul>
+<li>Set the <strong>PHP version</strong> switcher to the <strong>Off</strong> value. </li>
+<li>Set the <strong>Platform</strong> switcher to the the <strong>64-bit</strong> value.</li>
+<li>Set the <strong>Always On</strong> switcher to the the <strong>On</strong> value.</li>
+<li>[Optional] Set the <strong>Remote debugging</strong> switcher to the <strong>On</strong> value and select the Visual Studio version.</li>
+</ul>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-06.png" alt=""></p>
+
+<ul>
+<li>In the <strong>Connection strings</strong> group:
+
+<ul>
+<li>Add the <code>core</code>, <code>master</code>, <code>web</code>, <code>reporting</code> and <code>session</code> SQL Database connection strings.</li>
+<li>Add the <code>analytics</code>, <code>tracking.live</code>, <code>tracking.history</code> and <code>tracking.contact</code> MongoDB connection strings.<br>
+</li>
+</ul>
+</li>
+</ul>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-07.png" alt=""></p>
+
+<blockquote>
+<p><strong>Note:</strong> For information on deploying Sitecore databases to Azure, see the section <a href="how-to-deploy-sitecore-databases-to-azure-sql-database.md">How to deploy Sitecore databases to Azure SQL Database</a>.</p>
+</blockquote>
+
+<div class="highlight highlight-text-xml"><pre>Server=tcp:{server-name}.database.windows.net,1433;Database=Sitecore.Core;User ID={server-admin-login}@{server-name};Password={password};Trusted_Connection=False;Encrypt=True
+Server=tcp:{server-name}.database.windows.net,1433;Database=Sitecore.Master;User ID={server-admin-login}@{server-name};Password={password};Trusted_Connection=False;Encrypt=True
+Server=tcp:{server-name}.database.windows.net,1433;Database=Sitecore.Web;User ID={server-admin-login}@{server-name};Password={password};Trusted_Connection=False;Encrypt=True
+Server=tcp:{server-name}.database.windows.net,1433;Database=Sitecore.Reporting;User ID={server-admin-login}@{server-name};Password={password};Trusted_Connection=False;Encrypt=True
+Server=tcp:{server-name}.database.windows.net,1433;Database=Sitecore.Session;User ID={server-admin-login}@{server-name};Password={password};Trusted_Connection=False;Encrypt=True
+
+mongodb://{user-name}:{password}@{thehost}/sitecore_analytics
+mongodb://{user-name}:{password}@{thehost}/sitecore_tracking_lives
+mongodb://{user-name}:{password}@{thehost}/sitecore_tracking_historys
+mongodb://{user-name}:{password}@{thehost}/sitecore_tracking_contact </pre></div>
+
+<blockquote>
+<p><strong>Note:</strong> Use the above templates as an example of default Sitecore connection strings:</p>
+
+<ul>
+<li>For SQL Database connection strings, replace the <code>{server-name}</code> with the name of your Azure SQL Database service. The <code>{server-admin-login}</code> and <code>{password}</code> with SQL Server account credentials. </li>
+<li>For MongoDB connection strings, replace the <code>{host}</code> with the URL of your Mongo service. The <code>{user-name}</code> and <code>{password}</code> with your Mongo account credentials.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>In the <strong>ASP.NET Web Application</strong> project, include the default Sitecore files, directories and subdirectories. </p>
+
+<blockquote>
+<p><strong>Note:</strong> For information on creating an ASP.NET Web Application project for Sitecore, see the section <a href="how-to-create-aspnet-web-application-project.md">How To Create ASP.NET Web Application Project</a>.</p>
+</blockquote>
+
+<ul>
+<li>
+<p>For a <strong>Content Delivery</strong> environment:</p>
+
+<ul>
+<li>\App_Browsers</li>
+<li>\App_Config</li>
+<li>\App_Data</li>
+<li>\Areas</li>
+<li>\bin</li>
+<li>\Controllers</li>
+<li>\layouts</li>
+<li>\Models</li>
+<li>\sitecore\services</li>
+<li>\sitecore modules</li>
+<li>\sitecore_files</li>
+<li>\temp</li>
+<li>\upload</li>
+<li>\Views</li>
+<li>\xsl</li>
+<li>\Default.aspx</li>
+<li>\default.css</li>
+<li>\default.htm.sitedown</li>
+<li>\default.js</li>
+<li>\Global.asax</li>
+<li>\Web.config</li>
+<li>\webedit.css</li>
+</ul>
+</li>
+<li>
+<p>For a <strong>Content Management</strong> environment, additionally include the following directories and files:</p>
+
+<ul>
+<li>\sitecore\admin</li>
+<li>\sitecore\Copyright</li>
+<li>\sitecore\debug</li>
+<li>\sitecore\images</li>
+<li>\sitecore\login</li>
+<li>\sitecore\portal</li>
+<li>\sitecore\samples</li>
+<li>\sitecore\service</li>
+<li>\sitecore\shell</li>
+<li>\sitecore\blocked.aspx</li>
+<li>\sitecore\default.aspx</li>
+<li>\sitecore\no.css</li>
+</ul>
+</li>
+</ul>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-08.png" alt=""></p>
+
+<blockquote>
+<p><strong>Important:</strong> Visual Studio may freeze when including the entire <code>\sitecore\shell</code> directory at once because it contains a lot of files and subdirectories. Try to split all the subdirectories into portions, and then add them one by one.</p>
+</blockquote>
+</li>
+<li>
+<p>For a <strong>Content Management</strong> environment, Visual Studio may throw the following build errors:   </p>
+
+<pre><code>Build: Cannot compile external modules unless the '--module' flag is provided.
+</code></pre>
+
+<p>To address the above error, in the <strong>ASP.NET Web Application</strong> project's properties, switch to the <strong>TypeScript Build</strong> section and set the <strong>Module system</strong> property to the <strong>AMD</strong> value. Otherwise, exclude the following files from the project:</p>
+
+<ul>
+<li>\sitecore\shell\client\Speak\Assets\lib\core\1.2\SitecoreSpeak.ts</li>
+<li>\sitecore\shell\client\Speak\Assets\lib\core\1.2\SitecoreSpeak.d.ts</li>
+</ul>
+
+<pre><code>Project file must include the .NET Framework assembly 'WindowsBase, PresentationCore, PresentationFramework' in the reference list.    
+</code></pre>
+
+<p>To address the above error, in the <strong>Solution Explorer</strong> window, set the <strong>Build Action</strong> property to the <strong>Content</strong> value for the following item:</p>
+
+<ul>
+<li>\sitecore\shell\ClientBin\EmptySplashScreen.xaml </li>
+</ul>
+</li>
+<li>
+<p>In the <strong>Visual Studio</strong>, click the <strong>Tools</strong> -&gt; <strong>NuGet Package Manager</strong> -&gt; <strong>Packages Manager Console</strong>. Run the following command in the <strong>Package Manager Console</strong> window against the <strong>ASP.NET Web Application</strong> project:     </p>
+
+<div class="highlight highlight-source-powershell"><pre><span class="pl-c1">Install-Package</span> Sitecore.Azure.Setup <span class="pl-k">-</span>Version <span class="pl-c1"><span class="pl-c1">8.0</span></span>.<span class="pl-c1"><span class="pl-c1">2</span></span></pre></div>
+</li>
+<li>
+<p>In the <strong>ASP.NET Web Application</strong> project, right-click the <code>App_Data</code> item. Add the <code>license.xml</code> and <code>webdav.lic</code> files using the <strong>Add</strong> -&gt; <strong>Existing Item...</strong> command in the context menu.</p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-09.png" alt=""></p>
+</li>
+<li>
+<p>In the <strong>ASP.NET Web Application</strong> project, right-click the <code>Web.Debug.config</code> and then <code>Web.Release.config</code> files. Use the <strong>Preview Transform</strong> command in the context menu to check that all transformations look correct as you expect them to be.</p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-10.png" alt=""></p>
+
+<blockquote>
+<p><strong>Note:</strong> For more details about Web.config transformation syntax for Web Project Deployment using Visual Studio, see the MSDN website: <a href="http://msdn.microsoft.com/en-us/library/dd465326.aspx">http://msdn.microsoft.com/en-us/library/dd465326.aspx</a></p>
+</blockquote>
+</li>
+<li>
+<p>Right-click the <strong>ASP.NET Web Application</strong> project, and then click the <strong>Publish...</strong>  in the context menu. The <strong>Publish Web</strong> dialog box appears.     </p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-11.png" alt=""></p>
+</li>
+<li>
+<p>In the <strong>Publish Web</strong> dialog box, in the <strong>Profile</strong> step, click the <strong>Microsoft Azure Web Apps</strong> option and select the Web App that is created in created in Microsoft Azure Portal. </p>
+
+<p><img src="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-12.png" alt=""></p>
+
+<blockquote>
+<p><strong>Note:</strong> For the basic information about the Publish Web Wizard, see the MSDN website: <a href="https://msdn.microsoft.com/en-us/library/dd465337(v=vs.110).aspx">https://msdn.microsoft.com/en-us/library/dd465337(v=vs.110).aspx</a> </p>
+</blockquote>
+</li>
+</ol>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/schijioke-uche/sitecore8-deployment-on-Azure">Sitecore8-deployment-on-azure</a> is maintained by <a href="https://github.com/schijioke-uche">schijioke-uche</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
