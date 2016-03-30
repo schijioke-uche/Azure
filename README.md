@@ -124,7 +124,7 @@ In the **General settings** group:
      + \sitecore\default.aspx
      + \sitecore\no.css
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/VS-01.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-08.png)
 
    > **Important:** Visual Studio may freeze when including the entire `\sitecore\shell` directory at once because it contains a lot of files and subdirectories. Try to split all the subdirectories into portions, and then add them one by one.
 
@@ -153,21 +153,21 @@ In the **General settings** group:
    
 10. In the **ASP.NET Web Application** project, right-click the `App_Data` item. Add the `license.xml` and `webdav.lic` files using the **Add** -> **Existing Item...** command in the context menu.
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/VS-02.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-09.png)
 
 11. In the **ASP.NET Web Application** project, right-click the `Web.Debug.config` and then `Web.Release.config` files. Use the **Preview Transform** command in the context menu to check that all transformations look correct as you expect them to be.
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/VS-03.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-10.png)
 
    > **Note:** For more details about Web.config transformation syntax for Web Project Deployment using Visual Studio, see the MSDN website: http://msdn.microsoft.com/en-us/library/dd465326.aspx
  
 12. Right-click the **ASP.NET Web Application** project, and then click the **Publish...**  in the context menu. The **Publish Web** dialog box appears.     
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/VS-04.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-11.png)
 
 13. In the **Publish Web** dialog box, in the **Profile** step, click the **Microsoft Azure Web Apps** option and select the Web App that is created in created in Microsoft Azure Portal. 
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/VS-05.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-12.png)
 
    > **Note:** For the basic information about the Publish Web Wizard, see the MSDN website: https://msdn.microsoft.com/en-us/library/dd465337(v=vs.110).aspx 
 
