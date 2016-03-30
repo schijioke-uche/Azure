@@ -27,23 +27,23 @@ The recommended approach to deploy a Sitecore solution to Microsoft Azure using 
 
 1. Log in to the **Microsoft Azure Portal** using the https://portal.azure.com URL.
   
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-01.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-01.png)
   
 2. In the **Jumpbar**, click the **New** button, then select the **Web + Mobile** section and click the **Web App** button. The **Web App** blade appears.
    
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-02.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-02.png)
    
 3. In the **Web App** blade, fill in the **URL** field and configure the other section if needed, then click the **Create** button. 
  
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-03.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-03.png)
  
 4. In the **Startboard**, click on the **Web App** tile.
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-04.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-04.png)
 
 5. In the **Web App** blade, click the **All settings** button and select the **Application settings** section.
  
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-05.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-05.png)
  
 6. In the **Application settings** blade, configure the following groups and save the changes.
 7. 
@@ -53,13 +53,13 @@ In the **General settings** group:
      + Set the **Always On** switcher to the the **On** value.
      + \[Optional\] Set the **Remote debugging** switcher to the **On** value and select the Visual Studio version.
    
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-06.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-06.png)
    
    - In the **Connection strings** group:
      + Add the `core`, `master`, `web`, `reporting` and `session` SQL Database connection strings.
      + Add the `analytics`, `tracking.live`, `tracking.history` and `tracking.contact` MongoDB connection strings.   
 
-   ![](https://github.com/schijioke23/Sitecore-Azure-Content/raw/master/articles/media/how-to-deploy-sitecore-80-solution-to-microsoft-azure-web-app-using-visual-studio/AzurePortal-WebApp-07.png)
+   ![](https://github.com/schijioke-uche/sitecore8-deployment-on-Azure/blob/master/AzurePortal-WebApp-07.png)
   
    > **Note:** For information on deploying Sitecore databases to Azure, see the section [How to deploy Sitecore databases to Azure SQL Database](how-to-deploy-sitecore-databases-to-azure-sql-database.md).
    
